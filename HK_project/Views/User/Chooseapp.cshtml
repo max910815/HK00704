@@ -30,10 +30,11 @@
             {
                 @foreach (var a in app)
                 {
-                    <a onclick="sendData('@a.ApplicationId', '@a.ApplicationName')" class="mt-5 btn btn-outline-secondary col-6 justify-content-between d-flex align-items-center" style="height: 60px;">
+                    <a onclick="sendData('@a.ApplicationId', '@a.ApplicationName', '@a.Parameter')" class="mt-5 btn btn-outline-secondary col-6 justify-content-between d-flex align-items-center" style="height: 60px;">
                         <h2 class="col-4 m-0">@a.ApplicationName</h2>
                         <div class="col-4 h-100 d-flex align-items-end justify-content-end">
                             <h6>id: @a.ApplicationId</h6>
+                            <h6>temp: @a.Parameter</h6>
                         </div>
                     </a>
 
@@ -56,10 +57,11 @@
             $('#rangeValue').text($(this).val());
         })
 
-        function sendData(applicationId,  applicationName) {
+        function sendData(applicationId, applicationName, parameter) {
             var data = {
                 applicationId: applicationId,
-                applicationName: applicationName
+                applicationName: applicationName,
+                parameter: parameter
             };
 
             $.ajax({

@@ -15,10 +15,10 @@
     <form  asp-controller="Member" class="w-100 align-items-center justify-content-center d-flex flex-column px-2" style="height: 100vh;">
         <div class="row w-100 align-items-center justify-content-center flex-column flex-sm-row " style="height: 100px;">
             <h1 class="col-sm-4 col d-flex m-0 h-100 align-items-center justify-content-center">會員ID</h1>
-            <input asp-for="MemberId" disabled class="h-100 col-md-5 col rounded-pill bg-body-secondary border-0 md-50 me-2 px-5" type="text" style="font-size: 36pt;" value=@ViewBag.Member.MemberName>
+            <input asp-for="MemberId" disabled class="h-100 col-md-5 col rounded-pill bg-body-secondary border-0 md-50 me-2 px-5" type="text" style="font-size: 36pt;" value=@ViewBag.MemberCreatapp.MemberId>
 
             <!-- Add this line -->
-            <input type="hidden" asp-for="MemberId" value=@ViewBag.Member.MemberId>
+            <input type="hidden" asp-for="MemberId" value=@ViewBag.MemberCreatapp.MemberId>
                                                                                                                 
         </div>
         <div class="row w-100 align-items-center justify-content-center mt-5 flex-column flex-sm-row" style="height: 100px;">

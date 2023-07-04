@@ -4,6 +4,7 @@
     var ChatQaHistory = ViewBag.ChatQaHistory as List<Qahistory>;
     var Userappname = Context.Session.GetString("Userchoosename");
 }
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,23 +41,13 @@
                            data-id="@chat.ChatId">
                             @chat.ChatName
                         </a>
-
-
                     }
                 </div>
-                
 
-                @*<div class="overflow-y-scroll px-2 border-bottom border-dark" style="height: 75%;">
-                    <a class="btn btn-secondary w-100 rounded-5 d-flex align-items-center justify-content-center x-2"
-                       style="font-size: 2em; height: 80px; margin-top: 10px;">
-                        <p class="m-0">+ 新增聊天室</p>
-                    </a>
-
-                </div>*@
                 <div class="px-2 pe-4">
                     <a class="btn btn-light w-100 rounded-5"
                        style="font-size: 2em; height: 80px; margin-top: 20px;"></a>
-                    <a class="btn btn-light w-100 rounded-5 d-flex align-items-center justify-content-center"
+                    <a asp-action="Chooseapp" asp-controller="User" class="btn btn-light w-100 rounded-5 d-flex align-items-center justify-content-center"
                        style="font-size: 2em; height: 80px; margin-top: 10px;">
                         <p class="m-0">@Userappname</p>
                     </a>
@@ -67,7 +58,9 @@
         <div class="col px-0 h-100">
             <div class=" bg-body-secondary rounded-4 overflow-y-scroll" style="height: 91%;">
                 <!--問-->
-
+                <div class="chat-content w-100 bg-body-secondary p-5 d-flex flex-column align-items-end" style="height:auto">
+                    
+                </div>
                 @foreach(var item in ChatQaHistory)
                 {
                     <div class="chat-content w-100 bg-body-secondary p-5 d-flex flex-column align-items-end" style="height:auto">
@@ -83,34 +76,24 @@
                         </p>
                     </div>
                 }
-                @*<div class="w-100 bg-body-secondary p-5 d-flex flex-column align-items-end" style="height:auto">
-                    <p class="m-0 h1">問</p>
-                    <p class="m-0 h4 mt-3">
-                        外的都覺得，大家都還是大概就啊下一個，一件都是的風格，有這，隱特典今沒有，瘋狂是第一。
-
-                        跟你支還希望我會去，戀愛到了的東西便利商⋯蠻好但我漸漸這就可以。
-
-                        少讓我覺得活著其實沒想起來，什麼的時夾真的好：一樣是是怎樣，小時覺，其他狀態定將他起來就發混亂看有，肚子見尤其是。不會跟天還歡迎的東好，就您好裡有什我的心喜歡，要這喜歡喜歡真的把自己不是說。
-
-                        很可等等這的完全不符，是想希望型這樣對也很比起自己要，的經驗這兩之後最新那些，起來的動畫不錯洗這麼會。
-                    </p>
-                </div>
-                <div class="w-100 bg-body-secondary p-5 d-flex flex-column" style="height:auto">
-                    <p class="m-0 h1">答</p>
-                    <p class="m-0 h4 mt-3">
-                        外的都覺得，大家都還是大概就啊下一個，一件都是的風格，有這，隱特典今沒有，瘋狂是第一。
-
-                        跟你支還希望我會去，戀愛到了的東西便利商⋯蠻好但我漸漸這就可以。
-
-                        少讓我覺得活著其實沒想起來，什麼的時夾真的好：一樣是是怎樣，小時覺，其他狀態定將他起來就發混亂看有，肚子見尤其是。不會跟天還歡迎的東好，就您好裡有什我的心喜歡，要這喜歡喜歡真的把自己不是說。
-
-                        很可等等這的完全不符，是想希望型這樣對也很比起自己要，的經驗這兩之後最新那些，起來的動畫不錯洗這麼會。
-                    </p>
-                </div>*@
-
+               
 
             </div>
+                
+            
             <div class="row w-100 m-0 px-2 align-items-center justify-content-center bg-secondary" style="height: 8vh;">
+                <div class="col p-0 h-75">
+                    <textarea name="question" type="text" class="w-100 h-100" style="font-size: 6vh;resize:none;line-height: 6vh;" rows="3" placeholder="Please Enter The Question"></textarea>
+                </div>
+                <div class="col-3 p-0 h-75">
+                    <button id="sendout" type="submit" class="btn btn-primary w-100 h-100 d-flex align-items-center justify-content-center" style="font-size: 2rem;">
+                        <p class="m-0 p-0">送出</p>
+                    </button>
+                </div>
+            </div>
+            
+
+            @*<div class="row w-100 m-0 px-2 align-items-center justify-content-center bg-secondary" style="height: 8vh;">
                 <div class="col p-0 h-75">
                     <textarea type="text" class="w-100 h-100" style="font-size: 6vh;resize:none;line-height: 6vh;" rows="3" placeholder="Please Enter The Question"></textarea>
                 </div>
@@ -120,7 +103,8 @@
                         <p class="m-0 p-0">送出</p>
                     </a>
                 </div>
-            </div>
+            </div>*@
+
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -131,26 +115,43 @@
             leftbar.classList.toggle('d-none');
         });
 
-        //$(document).ready(function () {
-        //    console.log("Document is ready");
-        //    $("#createbtn").click(function (e) {
-        //        $.ajax({
-        //            url: '/User/Creatchat',
-        //            type: 'POST',
-        //            success: function (data) {
-        //                if (data.status === "success") {
-        //                    console.log("Button is clicked");
-        //                    // 假设data.chat是服务器返回的新聊天室的信息
-        //                    var newChatButton = `<a class="btn btn-secondary w-100 rounded-5 d-flex align-items-center justify-content-center x-2" style="font-size: 2em; height: 80px; margin-top: 10px;">
-        //                                            <p class="m-0">${data.chat.ChatName}</p>
-        //                                        </a>`;
-        //                    // 添加新的聊天室按钮到页面中
-        //                    $('#leftbar .overflow-y-scroll.px-2.border-bottom.border-dark').append(newChatButton);
-        //                }
-        //            }
-        //        });
-        //    });
-        //});
+        $(document).ready(function () {
+            $('#sendout').click(function () {
+                var question = $('textarea[name="question"]').val();
+                $.ajax({
+                    url: '/User/qainput',
+                    type: 'post',
+                    data: { 'question': question },
+                    success: function (response) {
+                        console.log(response);
+                        // 你可能需要適當地修改此處的代碼，以符合你的需求
+                        $('#response-container').text(response);
+                    }
+                });
+            });
+        });
+
+
+        $(document).ready(function () {
+            $("#createbtn").click(function (e) {
+                console.log("click");
+                e.preventDefault();
+                $.ajax({
+                    url: '/User/Creatchat', // Replace 'YourControllerName' with the actual name of your controller
+                    type: 'POST',
+                    success: function (data) {
+                        console.log(data);
+                        var newChat = `<a class="btn btn-secondary w-100 rounded-5 d-flex align-items-center justify-content-center x-2 chat-button"
+                                                style="font-size: 2em; height: 80px; margin-top: 10px;"
+                                                data-id="${data.chatId}">
+                                                ${data.chatName}
+                                            </a>`;
+                        $("#createbtn").after(newChat);
+                        $(".chat-content").empty();
+                    }
+                });
+            });
+        });
 
         $(document).ready(function () {
             $(".chat-button").click(function (e) {
@@ -166,15 +167,17 @@
                         console.log(data)
                         // 添加新的對話
                         data.forEach(item => {
+                            console.log(item);
+                            
                             var questionDiv = `
-                                <div class="w-100 bg-body-secondary p-5 d-flex flex-column align-items-end" style="height:auto">
+                                        <div class=" w-100 bg-body-secondary p-5 d-flex flex-column align-items-end" style="height:auto">
                                     <p class="m-0 h1">問</p>
-                                    <p class="m-0 h4 mt-3">${item.QahistoryQ}</p>
+                                            <p class="m-0 h4 mt-3">${item['qahistoryQ']}</p>
                                 </div>`;
                             var answerDiv = `
-                                <div class="w-100 bg-body-secondary p-5 d-flex flex-column" style="height:auto">
+                                        <div class=" w-100 bg-body-secondary p-5 d-flex flex-column" style="height:auto">
                                     <p class="m-0 h1">答</p>
-                                    <p class="m-0 h4 mt-3">${item.QahistoryA}</p>
+                                            <p class="m-0 h4 mt-3">${item['qahistoryA']}</p>
                                 </div>`;
 
                             $(".chat-content").append(questionDiv);
